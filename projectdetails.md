@@ -1,16 +1,20 @@
 ---
 layout: page
-title: About me
-subtitle: Why you'd want to go on a date with me
+title: Project Details
+subtitle: Information about the breast cancer detection algorithm
 ---
 
-My name is Inigo Montoya. I have the following qualities:
+## Summary
 
-- I rock a great mustache
-- I'm extremely loyal to my family
+You can use the [editor on GitHub](https://github.com/jordankupersmith/its_not_a_tumor/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
-What else do you need?
+Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### my history
+### Context and Motivation
 
-To be honest, I'm having some trouble remembering right now, so why don't you just watch [my movie](http://en.wikipedia.org/wiki/The_Princess_Bride_%28film%29) and it will answer **all** your questions.
+blah blah blah
+
+
+### Scope
+
+
