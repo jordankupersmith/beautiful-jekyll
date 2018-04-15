@@ -14,10 +14,10 @@ baseurl: "/its_not_a_tumor"
 # Of course don't forget to change the username and projectname to YOUR username and project
 
 # Name of website
-title: My website
+title: It's Not a Tumor
 
 # Short description of your site
-description: A virtual proof that name is awesome!
+description: Automatic breast cancer detection 
 
 # --- Navigation bar options --- #
 
@@ -71,11 +71,11 @@ author:
 # You can reorder the items to define the link order.
 # If you want to add a new link that isn't here, you'll need to also edit the file _data/SocialNetworks.yml
 social-network-links:
-  rss: true
-  email: "someone@example.com"
-  facebook: daattali
-  github: daattali
-  twitter: daattali
+  #rss: true
+  #email: "someone@example.com"
+  #facebook: daattali
+  github: jordankupersmith/w210_breast_cancer
+  #twitter: daattali
 #  reddit: yourname
 #  google-plus: +DeanAttali
 #  linkedin: daattali
@@ -92,10 +92,10 @@ social-network-links:
 
 # Select which share links to show in posts
 share-links-active:
-  twitter: true
-  facebook: true
+  twitter: false
+  facebook: false
   google: false
-  linkedin: true
+  linkedin: false
 
 # How to display the link to the website in the footer
 # Remove this if you don't want a link in the footer
