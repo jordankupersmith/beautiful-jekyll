@@ -32,7 +32,7 @@ Images from the Curated Breast Imaging Subset of Digital Database for Screening 
 
 #### Abnormality categories and labels
 
-Each of the abnormalities is rated in several categories:
+Each of the abnormalities is rated in several categories:<br>
 **Calcifications:**
 * Type: Amorphous, Pleomorphic, Punctate, Dystrophic, Vascular, etc.
 * Distribution: Clustered, Linear, Regional, Diffusely Scattered, etc.
