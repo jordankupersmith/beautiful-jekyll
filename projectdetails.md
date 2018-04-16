@@ -55,6 +55,7 @@ Our dataset came from the [Cancer Image Archive](https://www.cancerimagearchive.
 
 ![Example of a mammogram image with prominent mass](img/mammogram.png)
 ![Example of a mask image](img/mask.png)
+*Example of a mammogram image and its corresponding mask file.*
 
 All of the images were in the DICOM format, a common medical imaging format, so they required conversion to png files. Besides making the images easier to load, the conversion also decreased the size of dataset by 9x without losing image resolution. We then applied CLAHE equalization to each mammogram image to bring out the localized contrast. 
 
@@ -75,7 +76,8 @@ We followed the conventional approach to computer vision classification tasks an
 We tried many approaches, but the final model that we settled on was 4 layers of 1024 nodes each. Our best results came after training our dense layers alone for 5 epochs, acclimating them to the pre-trained features of Mobilenet. Then we opened up all layers for training for an additional 100 epochs through the data.
 
 We also dynamically made adjustments to our class weights after each epoch in order to keep our model conservative. By weighting positive classes higher, we could train the model to make more positive predictions, leading to our desired “more false positives than false negatives”.
-We trained our model on a NVIDIA Tesla P100 on Centos7 on IBM’s SoftLayer after downloading all proper NVIDIA drivers, building a docker image with NVIDIA deep learning libraries (NVIDIA-CUDA), and then loading our dataset downloaded from IBM S3. We had difficulty finding a package that would do our parameter searching that gave us the information that we wanted, so we wrote our own wrapper function from scratch to allow us to see the training graphs of each model to best tune our results.
+
+We trained our model on a NVIDIA Tesla P100 on Centos7 on IBM’s SoftLayer after downloading all proper NVIDIA drivers, building a docker image with NVIDIA deep learning libraries (NVIDIA-CUDA), and then loading our dataset downloaded from IBM S3. For future work, we would like to find a package that would do automated parameter searching. We wrote our own wrapper function from scratch to allow us to see the training graphs of each model to best tune our results.
 
 ### Results
 
@@ -114,6 +116,24 @@ The recall for our model was higher than our precision, which in our case was wh
 * Segmenting the image files was time consuming and limited experiments with different segment sizes.
 * Grayscale images decreased the efficacy of pretrained ImageNet models
 * Diffuse edges of features in the images further eroded efficacy of pretrained models
+
+### Web App
+
+With a trained model, we built a web app.  The web app allows users to upload an mammogram image.  When the image is uploaded, it is segmented and inference is performed on each segment with the trained model.  Segments that are predicted to contain potential tumors are highlighted in the resulting image.
+
+To try out the result of the training, click the [here](http://198.23.87.226) to upload an image and run the detection algorithm.
+
+Note: The image processing is very slow and can take up to ten minutes to perform.
+
+Here are some mammogram files that can be used to test the web app (save the images):
+[Example 1](img/mammogram1.png)
+[Example 2](img/mammogram2.png)
+[Example 3](img/mammogram3.png)
+[Example 4](img/mammogram4.png)
+[Example 5](img/mammogram5.png)
+[Example 6](img/mammogram6.png)
+[Example 7](img/mammogram7.png)
+[Example 8](img/mammogram8.png)
 
 
 
