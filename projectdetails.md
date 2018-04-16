@@ -64,7 +64,7 @@ With our dataset ready, we pushed it to SoftLayer’s S3 object storage. We all 
 
 The accuracy in the test set is 0.79. <br>
 
-#### Confusion Matrix
+#### Confusion Matrix<br>
 
 |                      | True Positive | True Negative |
 |----------------------|---------------|---------------|
