@@ -32,19 +32,19 @@ Images from the Curated Breast Imaging Subset of Digital Database for Screening 
 #### Abnormality categories and labels 
 
 Each of the abnormalities is rated in several categories:
-&nbsp;Calcifications
-&nbsp;&nbsp; * Type: Amorphous, Pleomorphic, Punctate, Dystrophic, Vascular, etc.
-&nbsp;&nbsp; * Distribution: Clustered, Linear, Regional, Diffusely Scattered, etc.
-&nbsp;&nbsp; * Assessment: 0 - 5 (Integer)
-&nbsp;&nbsp; * Pathology: Benign, Benign With Callback, Malignant
-&nbsp;&nbsp; * Subtlety: 1 - 5 (Integer)
+<br>&nbsp;Calcifications:
+<br>&nbsp;&nbsp; * Type: Amorphous, Pleomorphic, Punctate, Dystrophic, Vascular, etc.
+<br>&nbsp;&nbsp; * Distribution: Clustered, Linear, Regional, Diffusely Scattered, etc.
+<br>&nbsp;&nbsp; * Assessment: 0 - 5 (Integer)
+<br>&nbsp;&nbsp; * Pathology: Benign, Benign With Callback, Malignant
+<br>&nbsp;&nbsp; * Subtlety: 1 - 5 (Integer)
 
-Masses
-&nbsp; * Shape: Oval, Irregular, Round, Lymph Node, Focal Asymmetric Density, etc.
-&nbsp;&nbsp; * Margin: Spiculated, Ill Defined, Circumscribed, Obscured, Microlobulated, etc. 
-&nbsp;&nbsp; * Assessment: 0 - 5 (Integer)
-&nbsp;&nbsp; * Pathology: Benign, Benign With Callback, Malignant
-&nbsp;&nbsp; * Subtlety: 1 - 5 (Integer)
+<br>Masses
+<br>&nbsp; * Shape: Oval, Irregular, Round, Lymph Node, Focal Asymmetric Density, etc.
+<br>&nbsp;&nbsp; * Margin: Spiculated, Ill Defined, Circumscribed, Obscured, Microlobulated, etc. 
+<br>&nbsp;&nbsp; * Assessment: 0 - 5 (Integer)
+<br>&nbsp;&nbsp; * Pathology: Benign, Benign With Callback, Malignant
+<br>&nbsp;&nbsp; * Subtlety: 1 - 5 (Integer)
 
 
 ### Data Processing
