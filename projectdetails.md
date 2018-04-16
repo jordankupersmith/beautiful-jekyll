@@ -62,38 +62,15 @@ With our dataset ready, we pushed it to SoftLayer’s S3 object storage. We all 
 
 ### Results
 
-The accuracy in the test set is 0.79. 
+The accuracy in the test set is 0.79. <br>
 
-\documentclass{article}
-\usepackage{array}
-\usepackage{graphicx}
-\usepackage{multirow}
+|                      | True Positive | True Negative |   |   |
+|----------------------|---------------|---------------|---|---|
+| Predicted   Positive | 681           | 293           |   |   |
+| Predicted   Negative | 904           | 3842          |   |   |
+|                      |               |               |   |   |
 
-\newcommand\MyBox[2]{
-  \fbox{\lower0.75cm
-    \vbox to 1.7cm{\vfil
-      \hbox to 1.7cm{\hfil\parbox{1.4cm}{#1\\#2}\hfil}
-      \vfil}%
-  }%
-}
-
-\begin{document}
-
-\noindent
-\renewcommand\arraystretch{1.5}
-\setlength\tabcolsep{0pt}
-\begin{tabular}{c >{\bfseries}r @{\hspace{0.7em}}c @{\hspace{0.4em}}c @{\hspace{0.7em}}l}
-  \multirow{10}{*}{\rotatebox{90}{\parbox{1.1cm}{\bfseries\centering actual\\ value}}} & 
-    & \multicolumn{2}{c}{\bfseries Prediction outcome} & \\
-  & & \bfseries p & \bfseries n & \bfseries total \\
-  & p$'$ & \MyBox{681} & \MyBox{293} & P$'$ \\[2.4em]
-  & n$'$ & \MyBox{904} & \MyBox{3084} & N$'$ \\
-  & total & P & N &
-\end{tabular}
-
-\end{document}
-
-
+<br>
 ### Evaluation
 
 The model is significantly better than a coin flip but we cannot say it is highly accurate. The lack of accuracy is mostly false positives, which is okay for our purposes because this is a failsafe for doctors. We are light years away from replacing the naked eye. There is often a trade off in modeling between precision and recall. In this model, our recall is good but our precision is poor. Recall is more important in this case. In other words, we can either reduce false negatives or reduce false positives. It is better to reduce false negatives because we don't want a doctor getting a negative and then not looking carefully at the xray when there actually is a tumor. On the other hand, when the model flags it as positive, it would be a call to the doctor to look at it really carefully and then make the final call.
