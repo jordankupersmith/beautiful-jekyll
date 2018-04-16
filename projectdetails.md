@@ -70,9 +70,9 @@ The accuracy in the test set is 0.79. <br>
 |----------------------|---------------|---------------|
 | Predicted   Positive | 681           | 293           |
 | Predicted   Negative | 904           | 3842          |
-|                      |               |               | 
+ 
 
-
+<br>
 
 | Confusion Matrix Analysis          |       |   
 |------------------------------------|-------|
