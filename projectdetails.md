@@ -20,12 +20,12 @@ Ultimately, the goal is to save lives. In 2018, an estimated 266,120 new cases o
 ### Dataset
 
 Images from the Curated Breast Imaging Subset of Digital Database for Screening Mammography (CBIS-DDSM). They include 3,103 mammogram image examples with two different views: 
-*Cranial-Cuadal (CC): Exposure taken from above
-*Mediolateral-oblique (MLO): Exposure from the side at an angle
+* Cranial-Cuadal (CC): Exposure taken from above
+* Mediolateral-oblique (MLO): Exposure from the side at an angle
 
 <br> The data contain 3,672 tissue abnormality examples which are split between calcifications and masses:
-*1,872 identified calcifications
-*1,696 identified masses
+* 1,872 identified calcifications
+* 1,696 identified masses
 
 <br>Each abnormality includes a cropped image of the abnormality and a mask indicating the location in the full mammogram image
 
@@ -33,18 +33,18 @@ Images from the Curated Breast Imaging Subset of Digital Database for Screening 
 
 Each of the abnormalities is rated in several categories:
 &nbsp;Calcifications
-&nbsp;&nbsp;*Type: Amorphous, Pleomorphic, Punctate, Dystrophic, Vascular, etc.
-&nbsp;&nbsp;*Distribution: Clustered, Linear, Regional, Diffusely Scattered, etc.
-&nbsp;&nbsp;*Assessment: 0 - 5 (Integer)
-&nbsp;&nbsp;*Pathology: Benign, Benign With Callback, Malignant
-&nbsp;&nbsp;*Subtlety: 1 - 5 (Integer)
+&nbsp;&nbsp; * Type: Amorphous, Pleomorphic, Punctate, Dystrophic, Vascular, etc.
+&nbsp;&nbsp; * Distribution: Clustered, Linear, Regional, Diffusely Scattered, etc.
+&nbsp;&nbsp; * Assessment: 0 - 5 (Integer)
+&nbsp;&nbsp; * Pathology: Benign, Benign With Callback, Malignant
+&nbsp;&nbsp; * Subtlety: 1 - 5 (Integer)
 
 Masses
-&nbsp;*Shape: Oval, Irregular, Round, Lymph Node, Focal Asymmetric Density, etc.
-&nbsp;&nbsp;*Margin: Spiculated, Ill Defined, Circumscribed, Obscured, Microlobulated, etc. 
-&nbsp;&nbsp;*Assessment: 0 - 5 (Integer)
-&nbsp;&nbsp;*Pathology: Benign, Benign With Callback, Malignant
-&nbsp;&nbsp;*Subtlety: 1 - 5 (Integer)
+&nbsp; * Shape: Oval, Irregular, Round, Lymph Node, Focal Asymmetric Density, etc.
+&nbsp;&nbsp; * Margin: Spiculated, Ill Defined, Circumscribed, Obscured, Microlobulated, etc. 
+&nbsp;&nbsp; * Assessment: 0 - 5 (Integer)
+&nbsp;&nbsp; * Pathology: Benign, Benign With Callback, Malignant
+&nbsp;&nbsp; * Subtlety: 1 - 5 (Integer)
 
 
 ### Data Processing
@@ -70,10 +70,10 @@ The model is significantly better than a coin flip but we cannot say it is highl
 
 ### Challenges
 
-*The amount of data was significant and required GPUs to train in a reasonable amount of time. 
-*Segmenting the image files was time consuming and limited experiments with different segment sizes. 
-*Grayscale images decreased the efficacy of pretrained ImageNet models
-*Diffuse edges of features in the images further eroded efficacy of pretrained models
+* The amount of data was significant and required GPUs to train in a reasonable amount of time. 
+* Segmenting the image files was time consuming and limited experiments with different segment sizes. 
+* Grayscale images decreased the efficacy of pretrained ImageNet models
+* Diffuse edges of features in the images further eroded efficacy of pretrained models
 
 
 
