@@ -2,8 +2,6 @@
 layout: page
 title: Project Details
 subtitle: Information about the breast cancer detection algorithm
-image: /img/mammogram.png
-image: /img/mask.png
 ---
 
 
