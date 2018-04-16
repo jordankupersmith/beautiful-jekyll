@@ -8,8 +8,9 @@ subtitle: Information about the breast cancer detection algorithm
 
 ### Context and Motivation
 
-About 12% of women will develop breast cancer over the course of her lifetime. According to a 2011 medscape article, 52% of malignancies are missed on the mammography and more than 25% of those missed are due to human error. We aim to supplement the naked eye of medical doctors with image predicting techniques
-Our target audience for our image processing technique is medical doctors to aid them in breast cancer detection. We hope that medical doctors can supplement their detection methods of the naked eye with our algorithm
+About 12% of women will develop breast cancer over the course of her lifetime. According to a 2011 medscape article, 52% of malignancies are missed on the mammography and more than 25% of those missed are due to human error. We aim to augment the trained eye of medical doctors with image predicting techniques.
+
+Our target audience for our image processing technique is medical doctors to aid them in breast cancer detection. We hope that medical doctors can supplement their detection methods of the naked eye with our algorithm.
 
 
 
@@ -19,7 +20,7 @@ Ultimately, the goal is to save lives. In 2018, an estimated 266,120 new cases o
 
 ### Dataset
 
-Images from the Curated Breast Imaging Subset of Digital Database for Screening Mammography (CBIS-DDSM). They include 3,103 mammogram image examples with two different views: 
+Images from the Curated Breast Imaging Subset of Digital Database for Screening Mammography (CBIS-DDSM). They include 3,103 mammogram image examples with two different views:
 * Cranial-Cuadal (CC): Exposure taken from above
 * Mediolateral-oblique (MLO): Exposure from the side at an angle
 
@@ -29,39 +30,43 @@ Images from the Curated Breast Imaging Subset of Digital Database for Screening 
 
 <br>Each abnormality includes a cropped image of the abnormality and a mask indicating the location in the full mammogram image
 
-#### Abnormality categories and labels 
+#### Abnormality categories and labels
 
 Each of the abnormalities is rated in several categories:
-<br>&nbsp;Calcifications:
-<br>&nbsp;&nbsp; * Type: Amorphous, Pleomorphic, Punctate, Dystrophic, Vascular, etc.
-<br>&nbsp;&nbsp; * Distribution: Clustered, Linear, Regional, Diffusely Scattered, etc.
-<br>&nbsp;&nbsp; * Assessment: 0 - 5 (Integer)
-<br>&nbsp;&nbsp; * Pathology: Benign, Benign With Callback, Malignant
-<br>&nbsp;&nbsp; * Subtlety: 1 - 5 (Integer)
+**Calcifications:**
+* Type: Amorphous, Pleomorphic, Punctate, Dystrophic, Vascular, etc.
+* Distribution: Clustered, Linear, Regional, Diffusely Scattered, etc.
+* Assessment: 0 - 5 (Integer)
+* Pathology: Benign, Benign With Callback, Malignant
+* Subtlety: 1 - 5 (Integer)
 
-<br>&nbsp;Masses:
-<br>&nbsp;&nbsp; * Shape: Oval, Irregular, Round, Lymph Node, Focal Asymmetric Density, etc.
-<br>&nbsp;&nbsp; * Margin: Spiculated, Ill Defined, Circumscribed, Obscured, Microlobulated, etc. 
-<br>&nbsp;&nbsp; * Assessment: 0 - 5 (Integer)
-<br>&nbsp;&nbsp; * Pathology: Benign, Benign With Callback, Malignant
-<br>&nbsp;&nbsp; * Subtlety: 1 - 5 (Integer)
+**Masses:**
+* Shape: Oval, Irregular, Round, Lymph Node, Focal Asymmetric Density, etc.
+* Margin: Spiculated, Ill Defined, Circumscribed, Obscured, Microlobulated, etc.
+* Assessment: 0 - 5 (Integer)
+* Pathology: Benign, Benign With Callback, Malignant
+* Subtlety: 1 - 5 (Integer)
 
 
 ### Data Processing
 
 
-Our dataset came from cancerimagearchive.net, which was about 165gb of data. This was ~2700 mammogram images, with “mask” images, for a total of 6000 images. We “Mask” images to help researchers identify where cancer did occur in the image. The images needed to be converted from DICOM format to a more friendly format, and we selected png. These png images were cropped into 224x224 pixel images resulting in millions of images. Anything with a near black background was then filtered out so we would only train our model on actual tissue. There is large proportion of the images not containing cancer, and we decided to only keep a 1:5 ratio of positive to negative images.
-<br>  
-The total dataset is 147,442 224x224 images. Then we applied “Contrast Limited Adaptive Histogram Equalization” from OpenCV to bring out the contrast within images. Finally we sorted them into training, validation, and test datasets with an 8:1:1 ratio. The whole dataset was too large to hold in memory, so we used the “flow from directory” functionality of Keras and Tensorflow.
+Our dataset came from cancerimagearchive.net, which was about 165 GB of data. This was ~2700 mammogram images, with mask images, for a total of 6000 images. The mask images to help researchers identify where cancer did occur in the image. The images needed to be converted from DICOM format to a more friendly format, and we selected png. These png images were cropped into 224x224 pixel images resulting in millions of images. Anything with a near black background was then filtered out so we would only train our model on actual tissue. There is large proportion of the images not containing cancer, and we decided to only keep a 1:5 ratio of positive to negative images.
+
+The total dataset is 147,442 224x224 images. Then we applied Contrast Limited Adaptive Histogram Equalization from OpenCV to increase the contrast within images. Finally we sorted them into training, validation, and test datasets with an 8:1:1 ratio. Due to the size of the dataset, the data was loaded memory incrementally during training, using the built-in “flow from directory” functionality of Keras and Tensorflow.
 
 
 ### Cloud Computing
 
-With our dataset ready, we pushed it to SoftLayer’s S3 object storage. We all ended up using different cloud compute environments based on the credits that we had from remaining classes. We didn’t find that any were more helpful than others other than Google “Colaboratory” let you share a jupyter-like notebook, but with the shared document functionality of google docs as well as a GPU comuputer. Unfortunately, Softlayer doesn’t support GPUs on Ubuntu, requiring you to take additional steps to get it running. We trained a multitude of configurations including our own architectures, but ultimately settled on a pre-trained architecture called mobilenet. We chose this one because it was a lot lighter than the others, but hadn’t sacrificed much for accuracy. In the future, with more time and compute resources, we might switch to a more robust pre-trained model.  After 1 epoch through the data, we opened all layers up to training, which helped us out of our accuracy plateau around 67% accuracy.
+With our dataset ready, we pushed it to SoftLayer’s S3 object storage. We all ended up using different cloud compute environments based on the credits that we had from remaining classes. We didn’t find that any were more helpful than others other than Google “Colaboratory” let you share a jupyter-like notebook, but with the shared document functionality of google docs as well as a GPU computer. Unfortunately, Softlayer doesn’t support GPUs on Ubuntu, requiring you to take additional steps to get it running. We trained a multitude of configurations including our own architectures, but ultimately settled on a pre-trained architecture called mobilenet. We chose this one because it was a lot lighter than the others, but hadn’t sacrificed much for accuracy. In the future, with more time and compute resources, we might switch to a more robust pre-trained model.  After 1 epoch through the data, we opened all layers up to training, which helped us out of our accuracy plateau around 67% accuracy.
 
 ### Results
 
-The accuracy in the test set is 0.79. ::Insert confusion matrix here
+The accuracy in the test set is 0.79. 
+| Actual | Predicted Positive | Predicted Negative | 
+| ---|:---:|:---:|
+| Positive | 681 | 293  |
+| Negative | 904 | 3842 |
 
 ### Evaluation
 
@@ -71,10 +76,12 @@ The model is significantly better than a coin flip but we cannot say it is highl
 
 ### Challenges
 
-* The amount of data was significant and required GPUs to train in a reasonable amount of time. 
-* Segmenting the image files was time consuming and limited experiments with different segment sizes. 
+* The amount of data was significant and required GPUs to train in a reasonable amount of time.
+* Segmenting the image files was time consuming and limited experiments with different segment sizes.
 * Grayscale images decreased the efficacy of pretrained ImageNet models
 * Diffuse edges of features in the images further eroded efficacy of pretrained models
+
+
 
 
 
