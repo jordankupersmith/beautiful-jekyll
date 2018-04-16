@@ -53,8 +53,8 @@ Each of the abnormalities is rated in several categories:
 
 Our dataset came from the [Cancer Image Archive](https://www.cancerimagearchive.net), which was about 165 GB of data. There are ~2700 mammogram images, with mask images, for a total of 6700 images. The masks are overlaid, black and white images to help researchers identify where cancer occurs in the image. 
 
-![](img/mammogram.png)
-![](img/mask.png)
+![Example of a mammogram image with prominent mass](img/mammogram.png)
+![Example of a mask image](img/mask.png)
 
 All of the images were in the DICOM format, a common medical imaging format, so they required conversion to png files. Besides making the images easier to load, the conversion also decreased the size of dataset by 9x without losing image resolution. We then applied CLAHE equalization to each mammogram image to bring out the localized contrast. 
 
