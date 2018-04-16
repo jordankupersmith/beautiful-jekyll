@@ -64,13 +64,28 @@ With our dataset ready, we pushed it to SoftLayer’s S3 object storage. We all 
 
 The accuracy in the test set is 0.79. <br>
 
-|                      | True Positive | True Negative |   |   |
-|----------------------|---------------|---------------|---|---|
-| Predicted   Positive | 681           | 293           |   |   |
-| Predicted   Negative | 904           | 3842          |   |   |
-|                      |               |               |   |   |
+#### Confusion Matrix
+
+|                      | True Positive | True Negative |
+|----------------------|---------------|---------------|
+| Predicted   Positive | 681           | 293           |
+| Predicted   Negative | 904           | 3842          |
+|                      |               |               | 
+<br>
+
+| Sensitivity                        | 0.43  |
+| Specificity                        | 0.929 |
+| Precision                          | 0.699 |
+| Negative   Predictive Value        | 0.81  |
+| False   Positive Rate              | 0.071 |
+| False   Discovery Rate             | 0.301 |
+| False   Negative Rate              | 0.57  |
+| Accuracy                           | 0.791 |
+| F1   Score                         | 0.532 |
+| Matthews   Correlation Coefficient | 0.427 |
 
 <br>
+
 ### Evaluation
 
 The model is significantly better than a coin flip but we cannot say it is highly accurate. The lack of accuracy is mostly false positives, which is okay for our purposes because this is a failsafe for doctors. We are light years away from replacing the naked eye. There is often a trade off in modeling between precision and recall. In this model, our recall is good but our precision is poor. Recall is more important in this case. In other words, we can either reduce false negatives or reduce false positives. It is better to reduce false negatives because we don't want a doctor getting a negative and then not looking carefully at the xray when there actually is a tumor. On the other hand, when the model flags it as positive, it would be a call to the doctor to look at it really carefully and then make the final call.
