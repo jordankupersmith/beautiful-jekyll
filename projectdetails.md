@@ -39,8 +39,8 @@ Each of the abnormalities is rated in several categories:
 <br>&nbsp;&nbsp; * Pathology: Benign, Benign With Callback, Malignant
 <br>&nbsp;&nbsp; * Subtlety: 1 - 5 (Integer)
 
-<br>Masses
-<br>&nbsp; * Shape: Oval, Irregular, Round, Lymph Node, Focal Asymmetric Density, etc.
+<br>Masses>
+<br>&nbsp;&nbsp; * Shape: Oval, Irregular, Round, Lymph Node, Focal Asymmetric Density, etc.
 <br>&nbsp;&nbsp; * Margin: Spiculated, Ill Defined, Circumscribed, Obscured, Microlobulated, etc. 
 <br>&nbsp;&nbsp; * Assessment: 0 - 5 (Integer)
 <br>&nbsp;&nbsp; * Pathology: Benign, Benign With Callback, Malignant
@@ -51,7 +51,8 @@ Each of the abnormalities is rated in several categories:
 
 
 Our dataset came from cancerimagearchive.net, which was about 165gb of data. This was ~2700 mammogram images, with “mask” images, for a total of 6000 images. We “Mask” images to help researchers identify where cancer did occur in the image. The images needed to be converted from DICOM format to a more friendly format, and we selected png. These png images were cropped into 224x224 pixel images resulting in millions of images. Anything with a near black background was then filtered out so we would only train our model on actual tissue. There is large proportion of the images not containing cancer, and we decided to only keep a 1:5 ratio of positive to negative images.
-<br>  The total dataset is 147,442 224x224 images. Then we applied “Contrast Limited Adaptive Histogram Equalization” from OpenCV to bring out the contrast within images. Finally we sorted them into training, validation, and test datasets with an 8:1:1 ratio. The whole dataset was too large to hold in memory, so we used the “flow from directory” functionality of Keras and Tensorflow.
+<br>  
+The total dataset is 147,442 224x224 images. Then we applied “Contrast Limited Adaptive Histogram Equalization” from OpenCV to bring out the contrast within images. Finally we sorted them into training, validation, and test datasets with an 8:1:1 ratio. The whole dataset was too large to hold in memory, so we used the “flow from directory” functionality of Keras and Tensorflow.
 
 
 ### Cloud Computing
