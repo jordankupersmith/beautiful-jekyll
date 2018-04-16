@@ -39,7 +39,7 @@ Each of the abnormalities is rated in several categories:
 <br>&nbsp;&nbsp; * Pathology: Benign, Benign With Callback, Malignant
 <br>&nbsp;&nbsp; * Subtlety: 1 - 5 (Integer)
 
-<br>Masses>
+<br>&nbsp;Masses:
 <br>&nbsp;&nbsp; * Shape: Oval, Irregular, Round, Lymph Node, Focal Asymmetric Density, etc.
 <br>&nbsp;&nbsp; * Margin: Spiculated, Ill Defined, Circumscribed, Obscured, Microlobulated, etc. 
 <br>&nbsp;&nbsp; * Assessment: 0 - 5 (Integer)
