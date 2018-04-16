@@ -74,6 +74,7 @@ The accuracy in the test set is 0.79. <br>
 <br>
 
 | Sensitivity                        | 0.43  |
+|------------------------------------|-------|
 | Specificity                        | 0.929 |
 | Precision                          | 0.699 |
 | Negative   Predictive Value        | 0.81  |
