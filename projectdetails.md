@@ -128,7 +128,7 @@ With a trained model, we built a web app.  The web app allows users to upload an
 
 ![](img/predict.png)
 
-To try out the result of the training, click the [here](http://198.23.87.226) to upload an image and run the detection algorithm.
+To try out the result of the training, click the [here](http://158.85.202.22/) to upload an image and run the detection algorithm.
 
 Note: The image processing is very slow and can take up to ten minutes to perform.
 
