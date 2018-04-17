@@ -8,7 +8,7 @@ subtitle: Information about the breast cancer detection algorithm
 
 ### Context and Motivation
 
-In 2018 an estimated 266,120 U.S. women develop invasive breast cancer, about 40,000 who will die from it. Breast cancer is the second most diagnosed form of cancer, and has the second highest death rate of any cancer in American women. Currently radiology imaging is the most effective way of diagnosis.  But it requires trained radiologists, who in 2009 were cited as only 87% accurate in their predictions. Demand for imaging services has nearly doubled over last 10 years, as mammograms are more widely prescribed. Early and accurate diagnoses play a large role in the survival rates of breast cancer. Patients with stage II breast cancer, have a 5-year relative survival rate of about 93%, compared to stage IV breast cancers, which have a 5-year relative survival rate of about 15%.
+In 2018 an estimated 266,120 U.S. women develop invasive breast cancer, about 40,000 who will die from it. Breast cancer is the second most diagnosed form of cancer, and has the second highest death rate of any cancer in American women. Currently radiology imaging is the most effective way of diagnosis.  But it requires trained radiologists, who in 2009 were cited as only 87% accurate in their predictions. Demand for imaging services has nearly doubled over last 10 years, as mammograms are more widely prescribed. Early and accurate diagnoses play a large role in the survival rates of breast cancer. Patients with stage I breast cancer, have a 5-year relative survival rate of about 99%, compared to stage IV breast cancers, which have a 5-year relative survival rate of about 15%.
 
 Computer vision techniques can now reduce human error because of improved computational power (GPUs), improved algorithms and greater ability to process vast data for identifying feature sets (deep learning). Our aim for this project is to create a solution that can serve as a backstop for doctors, and reduce the number of misdiagnoses.
 
@@ -55,11 +55,14 @@ Our dataset came from the [Cancer Image Archive](https://www.cancerimagearchive.
 
 ![Example of a mammogram image with prominent mass](img/mammogram.png)
 ![Example of a mask image](img/mask.png)
+
 *Example of a mammogram image and its corresponding mask file.*
 
 All of the images were in the DICOM format, a common medical imaging format, so they required conversion to png files. Besides making the images easier to load, the conversion also decreased the size of dataset by 9x without losing image resolution. We then applied CLAHE equalization to each mammogram image to bring out the localized contrast. 
 
 These images were then segmented into 224x224 pixel images. This significantly increased the number of samples for training. Anything with a near black background was then filtered out so we would only train our model on actual tissue. The corresponding mask segments allowed us to label each segment as to  resulting in millions of smaller images. There was large proportion of the images not containing cancer, and we decided to only keep a random sample with a 1:5 ratio of positive to negative images.
+
+![](img/preprocess.png)
 
 The total dataset is 300,000+ 224x224 images. Finally we sorted them into training, validation, and test datasets with an 8:1:1 ratio. Due to the size of the dataset, the data was loaded in memory incrementally during training, using the built-in “flow from directory” functionality of Keras and Tensorflow.
 
@@ -82,6 +85,7 @@ We trained our model on a NVIDIA Tesla P100 on Centos7 on IBM’s SoftLayer afte
 ### Results
 
 After training on our final architecture we achieved 79% accuracy on our validation set. It should be noted that our validation set was unbalanced 1:5, positive:negative. After reweighting the results, our model still achieved 75.36% accuracy on our binary classification problem. The confusion matrix can be seen below in Table 1.
+
 #### Table 1.
 
 |                      | True Positive | True Negative |
@@ -89,6 +93,7 @@ After training on our final architecture we achieved 79% accuracy on our validat
 | Predicted   Positive | 681           | 293           |
 | Predicted   Negative | 904           | 3842          |
  
+#### Table 2.
 
 | Confusion Matrix Analysis          |       |   
 |------------------------------------|-------|
@@ -115,7 +120,7 @@ The recall for our model was higher than our precision, which in our case was wh
 * The amount of data was significant and required GPUs to train in a reasonable amount of time.
 * Segmenting the image files was time consuming and limited experiments with different segment sizes.
 * Grayscale images decreased the efficacy of pretrained ImageNet models
-* Diffuse edges of features in the images further eroded efficacy of pretrained models
+* Soft edges of tumors in the images challenged the efficacy of pretrained models
 
 ### Web App
 
@@ -134,6 +139,7 @@ Here are some mammogram files that can be used to test the web app (save the ima
 [Example 6](img/mammogram6.png)
 [Example 7](img/mammogram7.png)
 [Example 8](img/mammogram8.png)
+
 
 
 
