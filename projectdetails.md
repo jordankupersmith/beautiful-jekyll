@@ -8,7 +8,7 @@ subtitle: Information about the breast cancer detection algorithm
 
 ### Context and Motivation
 
-In 2018 an estimated 266,120 U.S. women develop invasive breast cancer, about 40,000 who will die from it. Breast cancer is the second most diagnosed form of cancer, and has the second highest death rate of any cancer in American women. Currently radiology imaging is the most effective way of diagnosis.  But it requires trained radiologists, who in 2009 were cited as only 87% accurate in their predictions. Demand for imaging services has nearly doubled over last 10 years, as mammograms are more widely prescribed. Early and accurate diagnoses play a large role in the survival rates of breast cancer. Patients with stage I breast cancer, have a 5-year relative survival rate of about 99%, compared to stage IV breast cancers, which have a 5-year relative survival rate of about 15%.
+In 2018 an estimated 266,120 U.S. women will develop invasive breast cancer, about 40,000 who will die from it. Breast cancer is the second most diagnosed form of cancer, and has the second highest death rate of any cancer in American women. Currently radiology imaging is the most effective way of diagnosis.  But it requires trained radiologists, who in 2009 were cited as only 87% accurate in their predictions. Demand for imaging services has nearly doubled over last 10 years, as mammograms are more widely prescribed. Early and accurate diagnoses play a large role in the survival rates of breast cancer. Patients with stage I breast cancer, have a 5-year relative survival rate of about 99%, compared to stage IV breast cancers, which have a 5-year relative survival rate of about 15%.
 
 Computer vision techniques can now reduce human error because of improved computational power (GPUs), improved algorithms and greater ability to process vast data for identifying feature sets (deep learning). Our aim for this project is to create a solution that can serve as a backstop for doctors, and reduce the number of misdiagnoses.
 
@@ -62,7 +62,7 @@ All of the images were in the DICOM format, a common medical imaging format, so 
 
 These images were then segmented into 224x224 pixel images. This significantly increased the number of samples for training. Anything with a near black background was then filtered out so we would only train our model on actual tissue. The corresponding mask segments allowed us to label each segment as to  resulting in millions of smaller images. There was large proportion of the images not containing cancer, and we decided to only keep a random sample with a 1:5 ratio of positive to negative images.
 
-![](img/preprocess.png)
+![Data processing](img/preprocess.png)
 
 The total dataset is 300,000+ 224x224 images. Finally we sorted them into training, validation, and test datasets with an 8:1:1 ratio. Due to the size of the dataset, the data was loaded in memory incrementally during training, using the built-in “flow from directory” functionality of Keras and Tensorflow.
 
@@ -126,7 +126,9 @@ The recall for our model was higher than our precision, which in our case was wh
 
 With a trained model, we built a web app.  The web app allows users to upload an mammogram image.  When the image is uploaded, it is segmented and inference is performed on each segment with the trained model.  Segments that are predicted to contain potential tumors are highlighted in the resulting image.
 
-To try out the result of the training, click the [here](http://198.23.87.226) to upload an image and run the detection algorithm.
+![Output](img/predict.png)
+
+To try out the result of the training, click the [here](http://158.85.202.22/) to upload an image and run the detection algorithm.
 
 Note: The image processing is very slow and can take up to ten minutes to perform.
 
