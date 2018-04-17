@@ -8,31 +8,32 @@ subtitle: Information about the breast cancer detection algorithm
 
 ### Context and Motivation
 
-About 12% of women will develop breast cancer over the course of her lifetime. According to a 2011 medscape article, 52% of malignancies are missed on the mammography and more than 25% of those missed are due to human error. We aim to augment the trained eye of medical doctors with image predicting techniques.
+In 2018 an estimated 266,120 U.S. women develop invasive breast cancer, about 40,000 who will die from it. Breast cancer is the second most diagnosed form of cancer, and has the second highest death rate of any cancer in American women. Currently radiology imaging is the most effective way of diagnosis.  But it requires trained radiologists, who in 2009 were cited as only 87% accurate in their predictions. Demand for imaging services has nearly doubled over last 10 years, as mammograms are more widely prescribed. Early and accurate diagnoses play a large role in the survival rates of breast cancer. Patients with stage II breast cancer, have a 5-year relative survival rate of about 93%, compared to stage IV breast cancers, which have a 5-year relative survival rate of about 15%.
 
-Our target audience for our image processing technique is medical doctors to aid them in breast cancer detection. We hope that medical doctors can supplement their detection methods of the naked eye with our algorithm.
-
+Computer vision techniques can now reduce human error because of improved computational power (GPUs), improved algorithms and greater ability to process vast data for identifying feature sets (deep learning). Our aim for this project is to create a solution that can serve as a backstop for doctors, and reduce the number of misdiagnoses.
 
 
 ### Scope
 
-Ultimately, the goal is to save lives. In 2018, an estimated 266,120 new cases of breast cancer will be diagnosed and about 40,920 women will die from it. This tool will aid in the early diagnosis of breast cancer which is very important. More than 90% of women diagnosed with breast cancer at the earliest stage survive their disease for at least 5 years compared to around 15% for women diagnosed with the most advanced stage of disease (http://www.cancerresearchuk.org).
+Our goal is to save lives with more accurate diagnoses for breast cancer. We decided to create a binary classifier based on computer vision techniques, that provided a prediction as to whether an image contained cancer or not and indicated the location of the tumor. 
 
 ### Dataset
 
 Images from the Curated Breast Imaging Subset of Digital Database for Screening Mammography (CBIS-DDSM). They include 3,103 mammogram image examples with two different views:
+
 * Cranial-Cuadal (CC): Exposure taken from above
 * Mediolateral-oblique (MLO): Exposure from the side at an angle
 
-<br> The data contain 3,672 tissue abnormality examples which are split between calcifications and masses:
+The data contain 3,672 tissue abnormality examples which are split between calcifications and masses:
 * 1,872 identified calcifications
 * 1,696 identified masses
 
-<br>Each abnormality includes a cropped image of the abnormality and a mask indicating the location in the full mammogram image
+Each abnormality includes a cropped image of the abnormality and a mask indicating the location in the full mammogram image
 
 #### Abnormality categories and labels
 
-Each of the abnormalities is rated in several categories:<br>
+Each of the abnormalities is rated in several categories:
+
 **Calcifications:**
 * Type: Amorphous, Pleomorphic, Punctate, Dystrophic, Vascular, etc.
 * Distribution: Clustered, Linear, Regional, Diffusely Scattered, etc.
@@ -50,29 +51,44 @@ Each of the abnormalities is rated in several categories:<br>
 
 ### Data Processing
 
+Our dataset came from the [Cancer Image Archive](https://www.cancerimagearchive.net), which was about 165 GB of data. There are ~2700 mammogram images, with mask images, for a total of 6700 images. The masks are overlaid, black and white images to help researchers identify where cancer occurs in the image. 
 
-Our dataset came from cancerimagearchive.net, which was about 165 GB of data. This was ~2700 mammogram images, with mask images, for a total of 6000 images. The mask images to help researchers identify where cancer did occur in the image. The images needed to be converted from DICOM format to a more friendly format, and we selected png. These png images were cropped into 224x224 pixel images resulting in millions of images. Anything with a near black background was then filtered out so we would only train our model on actual tissue. There is large proportion of the images not containing cancer, and we decided to only keep a 1:5 ratio of positive to negative images.
+![Example of a mammogram image with prominent mass](img/mammogram.png)
+![Example of a mask image](img/mask.png)
+*Example of a mammogram image and its corresponding mask file.*
 
-The total dataset is 147,442 224x224 images. Then we applied Contrast Limited Adaptive Histogram Equalization from OpenCV to increase the contrast within images. Finally we sorted them into training, validation, and test datasets with an 8:1:1 ratio. Due to the size of the dataset, the data was loaded memory incrementally during training, using the built-in “flow from directory” functionality of Keras and Tensorflow.
+All of the images were in the DICOM format, a common medical imaging format, so they required conversion to png files. Besides making the images easier to load, the conversion also decreased the size of dataset by 9x without losing image resolution. We then applied CLAHE equalization to each mammogram image to bring out the localized contrast. 
+
+These images were then segmented into 224x224 pixel images. This significantly increased the number of samples for training. Anything with a near black background was then filtered out so we would only train our model on actual tissue. The corresponding mask segments allowed us to label each segment as to  resulting in millions of smaller images. There was large proportion of the images not containing cancer, and we decided to only keep a random sample with a 1:5 ratio of positive to negative images.
+
+The total dataset is 300,000+ 224x224 images. Finally we sorted them into training, validation, and test datasets with an 8:1:1 ratio. Due to the size of the dataset, the data was loaded in memory incrementally during training, using the built-in “flow from directory” functionality of Keras and Tensorflow.
 
 
 ### Cloud Computing
 
-With our dataset ready, we pushed it to SoftLayer’s S3 object storage. We all ended up using different cloud compute environments based on the credits that we had from remaining classes. We didn’t find that any were more helpful than others other than Google “Colaboratory” let you share a jupyter-like notebook, but with the shared document functionality of google docs as well as a GPU computer. Unfortunately, Softlayer doesn’t support GPUs on Ubuntu, requiring you to take additional steps to get it running. We trained a multitude of configurations including our own architectures, but ultimately settled on a pre-trained architecture called mobilenet. We chose this one because it was a lot lighter than the others, but hadn’t sacrificed much for accuracy. In the future, with more time and compute resources, we might switch to a more robust pre-trained model.  After 1 epoch through the data, we opened all layers up to training, which helped us out of our accuracy plateau around 67% accuracy.
+With our dataset ready, we pushed it to IBM SoftLayer’s S3 object storage. We explored different cloud compute environments based on the credits that we had from remaining classes. We found that some platforms were more helpful than others:
+
+* Pre-configured Deep Learning/GPU Images on Google Cloud Compute and AWS were much more convenient than configuring an instance from scratch on IBM Softlayer.
+* Google “Colaboratory” was especially helpful, letting you share a jupyter-like notebook, but with the shared document functionality of google docs as well as a GPU computer. It also included free GPU access to speed up training.
+
+We followed the conventional approach to computer vision classification tasks and used Convolutional Neural Networks (CNNs) for this project. We started by trying to train our own architectures, but after further research and experimentation decided to use pretrained networks provided by the Keras deep learning package in python. The network that we settled on was MobileNet, a relatively small architecture intended for use on mobile devices, because of its speed of training/iteration and low memory usage. In addition to the pretrained base convolutional layers of Mobilenet, we added additional dense layers that we could train specifically to our task of identifying breast cancer.
+
+We tried many approaches, but the final model that we settled on was 4 layers of 1024 nodes each. Our best results came after training our dense layers alone for 5 epochs, acclimating them to the pre-trained features of Mobilenet. Then we opened up all layers for training for an additional 100 epochs through the data.
+
+We also dynamically made adjustments to our class weights after each epoch in order to keep our model conservative. By weighting positive classes higher, we could train the model to make more positive predictions, leading to our desired “more false positives than false negatives”.
+
+We trained our model on a NVIDIA Tesla P100 on Centos7 on IBM’s SoftLayer after downloading all proper NVIDIA drivers, building a docker image with NVIDIA deep learning libraries (NVIDIA-CUDA), and then loading our dataset downloaded from IBM S3. For future work, we would like to find a package that would do automated parameter searching. We wrote our own wrapper function from scratch to allow us to see the training graphs of each model to best tune our results.
 
 ### Results
 
-The accuracy in the test set is 0.79. <br>
-
-#### Confusion Matrix<br>
+After training on our final architecture we achieved 79% accuracy on our validation set. It should be noted that our validation set was unbalanced 1:5, positive:negative. After reweighting the results, our model still achieved 75.36% accuracy on our binary classification problem. The confusion matrix can be seen below in Table 1.
+#### Table 1.
 
 |                      | True Positive | True Negative |
 |----------------------|---------------|---------------|
 | Predicted   Positive | 681           | 293           |
 | Predicted   Negative | 904           | 3842          |
  
-
-<br>
 
 | Confusion Matrix Analysis          |       |   
 |------------------------------------|-------|
@@ -87,13 +103,12 @@ The accuracy in the test set is 0.79. <br>
 | F1   Score                         | 0.532 |
 | Matthews   Correlation Coefficient | 0.427 |
 
-<br>
 
 ### Evaluation
 
-The model is significantly better than a coin flip but we cannot say it is highly accurate. The lack of accuracy is mostly false positives, which is okay for our purposes because this is a failsafe for doctors. We are light years away from replacing the naked eye. There is often a trade off in modeling between precision and recall. In this model, our recall is good but our precision is poor. Recall is more important in this case. In other words, we can either reduce false negatives or reduce false positives. It is better to reduce false negatives because we don't want a doctor getting a negative and then not looking carefully at the xray when there actually is a tumor. On the other hand, when the model flags it as positive, it would be a call to the doctor to look at it really carefully and then make the final call.
+The model is significantly better than chance at 0.791 but has an error rate too high for deployment in a clinical trial.  The lack of accuracy is mostly false positives, which is acceptable for our purposes because this is meant as a secondary sanity check for doctors. This project still requires significant development time before replacing a trained radiologist. 
 
-<br>We attempted many tweaks to the model, these included adjustments such as using pretrained models, different layers, different numbers of nodes, adjustments to dropout and batch size only resulted in marginal improvements.
+The recall for our model was higher than our precision, which in our case was what we wanted. In other words, our model tended to reduce false negatives over false positives. Our reasoning was that the costs of missing cancer was greater than having doctors double check their diagnosis a few extra times.
 
 ### Challenges
 
@@ -102,13 +117,23 @@ The model is significantly better than a coin flip but we cannot say it is highl
 * Grayscale images decreased the efficacy of pretrained ImageNet models
 * Diffuse edges of features in the images further eroded efficacy of pretrained models
 
+### Web App
 
+With a trained model, we built a web app.  The web app allows users to upload an mammogram image.  When the image is uploaded, it is segmented and inference is performed on each segment with the trained model.  Segments that are predicted to contain potential tumors are highlighted in the resulting image.
 
+To try out the result of the training, click the [here](http://198.23.87.226) to upload an image and run the detection algorithm.
 
+Note: The image processing is very slow and can take up to ten minutes to perform.
 
-
-
-
+Here are some mammogram files that can be used to test the web app (save the images):
+[Example 1](img/mammogram1.png)
+[Example 2](img/mammogram2.png)
+[Example 3](img/mammogram3.png)
+[Example 4](img/mammogram4.png)
+[Example 5](img/mammogram5.png)
+[Example 6](img/mammogram6.png)
+[Example 7](img/mammogram7.png)
+[Example 8](img/mammogram8.png)
 
 
 
