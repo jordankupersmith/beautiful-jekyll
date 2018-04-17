@@ -1,6 +1,6 @@
 ---
 layout: page
-title: The "It's Not a Tumor" team
+title: The "It's Not a Tumor" Team
 subtitle: Our machine learning team
 ---
 
