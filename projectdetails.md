@@ -126,6 +126,8 @@ The recall for our model was higher than our precision, which in our case was wh
 
 With a trained model, we built a web app.  The web app allows users to upload an mammogram image.  When the image is uploaded, it is segmented and inference is performed on each segment with the trained model.  Segments that are predicted to contain potential tumors are highlighted in the resulting image.
 
+![](img/predict.png)
+
 To try out the result of the training, click the [here](http://198.23.87.226) to upload an image and run the detection algorithm.
 
 Note: The image processing is very slow and can take up to ten minutes to perform.
