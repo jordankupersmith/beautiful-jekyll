@@ -6,7 +6,7 @@ subtitle: Information about the breast cancer detection algorithm
 
 
 
-### Context and Motivation!
+### Context and Motivation
 
 In 2018 an estimated 266,120 U.S. women develop invasive breast cancer, about 40,000 who will die from it. Breast cancer is the second most diagnosed form of cancer, and has the second highest death rate of any cancer in American women. Currently radiology imaging is the most effective way of diagnosis.  But it requires trained radiologists, who in 2009 were cited as only 87% accurate in their predictions. Demand for imaging services has nearly doubled over last 10 years, as mammograms are more widely prescribed. Early and accurate diagnoses play a large role in the survival rates of breast cancer. Patients with stage I breast cancer, have a 5-year relative survival rate of about 99%, compared to stage IV breast cancers, which have a 5-year relative survival rate of about 15%.
 
