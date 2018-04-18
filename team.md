@@ -11,9 +11,11 @@ I specialize in creative innovation in the application of Data Science. I view D
 
 ### Matt Post
 
+My interests are widespread, but my career has been built around one area: transforming data communication networks and experiences. I am drawn to large scale, holistic transformation objectives that optimize customer experience while overcoming financial and operational bottlenecks, which led to a passion for the necessary catalyst for such transformation: big data and analytics. I am now leading a big data effort to transform everything from network automation to the target customer experience for CenturyLink, a leading global service provider.
 
 ### Riley Rustad
 
+Current Graduate student in the Masters of Information and Data Science at UC Berkeley with undergraduate degree in human health and biology. Experience working to open and analyze the city of Portland's civic data, and non-profit management. Special interests and studies in machine learning, data architecture, predictive analytics and modeling, data mining, neural networks, business intelligence, and open health data technologies.
 
 ### Eric Tsai
 
